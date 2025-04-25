@@ -11,6 +11,10 @@ class Settings(BaseSettings):
     # 默认DPI设置
     DEFAULT_DPI: int = 200
     
+    # API 密钥设置
+    API_KEY: str = os.environ.get("API_KEY", "ADFeerer2343vdfFIOUKwefoijlsakfj98798")
+    API_KEY_NAME: str = "x-api-key"
+    
     class Config:
         env_file = ".env"
 

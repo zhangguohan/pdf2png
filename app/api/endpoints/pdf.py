@@ -1,9 +1,10 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks
+from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks, Depends
 from fastapi.responses import FileResponse
 import os
 import uuid
 from typing import List
 from app.services.pdf_service import convert_pdf_to_png
+from app.core.security import get_api_key
 
 router = APIRouter()
 
@@ -13,7 +14,8 @@ async def convert_pdf(
     file: UploadFile = File(...),
     dpi: int = 200,
     first_page: int = None,
-    last_page: int = None
+    last_page: int = None,
+    api_key: str = Depends(get_api_key)
 ):
     """
     上传PDF文件并将其转换为PNG图像
